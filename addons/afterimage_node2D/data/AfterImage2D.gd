@@ -27,6 +27,10 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 ## if overide_frame_color is true, the color to make the frames apear 
 @export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
 
+@export_group("Frame Physics")
+## A direction frames should move toward as they fade out, offseted by their current position 
+@export var frame_final_pos_offset : Vector2 = Vector2(0, 0)
+
 @export_group("")
 ## The sprite to copy for the effect (Needs to be set for the effect to work!) 
 @export var sprite_to_copy : Sprite2D 
@@ -78,7 +82,7 @@ func _process(delta: float) -> void:
 		_copy_sprite_to_index(0)
 		
 		## Then tell that frame to play!
-		trail_objects[0].start_fade(fade_time)
+		trail_objects[0].start_fade(fade_time, frame_final_pos_offset)
 		## After priming, send the index to the back of the array! 
 		trail_objects.push_back(trail_objects.pop_front())
 		
