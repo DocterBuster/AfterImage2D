@@ -13,12 +13,12 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
 @export var do_fade = true
 ## How many frames are generated for the trail  
-@export var trail_amount : int = 1:
+@export var trail_amount : int = 3:
 	set(value):
 		trail_amount = value
 		_update_trail_amount()
 ## How long should the fade be? 
-@export var fade_time : float = 1.0
+@export var fade_time : float = 0.5
 
 ## The starting Alpha modulate of the sprite frame when it is displayed 
 @export_range(0.0, 1.0) var starting_alpha : float = 1.0
@@ -39,6 +39,9 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 
 ## The array of loaded trail frames : with [0] representing the most recently (or soon to be) emited index of the trail and the last element being the oldest
 var trail_objects : Array[AfterImage2DFrame] = []
+
+func _ready() -> void:
+	_update_trail_amount()
 
 
 #region Effect Population
@@ -66,7 +69,7 @@ var wait_finished = true
 
 func _process(delta: float) -> void:
 	
-	if(emiting and wait_finished):
+	if(emiting and wait_finished and trail_objects.size() > 0):
 		## How long to wait is dependent on the frame count and fade time 
 		var next_wait_invertal : float = fade_time / trail_amount
 		
