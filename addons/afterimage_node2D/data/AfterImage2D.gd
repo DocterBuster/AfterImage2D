@@ -94,6 +94,9 @@ func _process(delta: float) -> void:
 ## (INTERNAL HELPER) Copies the selected sprite's data to an index of the array (typicaly 0) 
 func _copy_sprite_to_index(index : int):
 	
+	##Reparent to topmost child 
+	move_child(trail_objects[0], get_child_count() - 1)
+	
 	## Set position to emmiter position 
 	trail_objects[0].position = global_position ## Postion of emmiter 
 	

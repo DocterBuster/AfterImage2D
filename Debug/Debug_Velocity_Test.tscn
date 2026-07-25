@@ -100,7 +100,7 @@ texture = ExtResource("1_2lfwe")
 [node name="AfterImage2D" type="Node2D" parent="AngleTest" unique_id=1988996881 node_paths=PackedStringArray("sprite_to_copy")]
 script = ExtResource("2_0gpev")
 trail_amount = 10
-fade_time = 0.75
+starting_alpha = 0.44
 overide_frame_color = false
 frame_final_pos_offset = Vector2(100, 20)
 sprite_to_copy = NodePath("../SprRoaringknightIdle")
