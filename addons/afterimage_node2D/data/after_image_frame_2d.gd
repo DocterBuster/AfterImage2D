@@ -1,4 +1,5 @@
 @tool
+class_name AfterImage2DFrame
 extends Sprite2D
 
 

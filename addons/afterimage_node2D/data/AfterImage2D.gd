@@ -20,12 +20,35 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 ## How long should the fade be? 
 @export var fade_time : float = 1.0
 
+@export_group("")
+## The sprite to copy for the effect
+@export var sprite_to_copy : Sprite2D 
+
+
+
+### Non-Editor Members
+
+## The array of loaded trail frames : with [0] representing the most recently (or soon to be) emited index of the trail and the last element being the oldest
+var trail_objects : Array[AfterImage2DFrame] = []
+
 
 #region Effect Population
 
 ## Updates the trail amount, called when trail_amount is changed 
 func _update_trail_amount():
-	pass
+	
+	if(trail_objects.size() < trail_amount):
+		## Add objects from the trail starting at the backmost index
+		for i in range(0, trail_amount - trail_objects.size()):
+			var frame : AfterImage2DFrame = image_frame_ref.instantiate()
+			trail_objects.append(frame)
+			add_child(frame)
+	elif(trail_objects.size() > trail_amount):
+		## Remove objects from the trail starting at the backmost index
+		for i in range(trail_objects.size() - 1, trail_amount - 1, -1):
+			trail_objects[i].free()
+			trail_objects.remove_at(i)
+
 
 
 
