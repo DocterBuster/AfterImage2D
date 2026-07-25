@@ -94,16 +94,16 @@ position = Vector2(693, 231)
 
 [node name="SprRoaringknightIdle" type="Sprite2D" parent="AngleTest" unique_id=1649267451]
 z_index = 1
-scale = Vector2(1.8913044, 1.8913044)
+scale = Vector2(2, 2)
 texture = ExtResource("1_2lfwe")
 
 [node name="AfterImage2D" type="Node2D" parent="AngleTest" unique_id=1988996881 node_paths=PackedStringArray("sprite_to_copy")]
 script = ExtResource("2_0gpev")
-trail_amount = 5
-starting_alpha = 0.468
-overide_frame_color = false
-frame_final_pos_offset = Vector2(100, 20)
 sprite_to_copy = NodePath("../SprRoaringknightIdle")
+trail_amount = 5
+starting_alpha = 0.5
+overide_frame_color = false
+frame_final_pos_offset = Vector2(100, 0)
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AngleTest" unique_id=809680801]

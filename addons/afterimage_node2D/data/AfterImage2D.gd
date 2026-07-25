@@ -14,11 +14,20 @@ signal frame_spawned(frame : Sprite2D)
 
 
 ## Members
+
+@export_group("")
+## If the effect should be turned on  
+@export var emiting : bool = true
+## The sprite to copy for the effect (Needs to be set for the effect to work!) 
+@export var sprite_to_copy : Sprite2D 
+
+
 @export_group("Frame Properties")
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
 @export var do_fade : bool = true
 
 ## If the effect should use the frame of the sprite when it was spawned or match what is displayed on the sprite
+## (Note: setting this to false is more preformance intensive!) 
 @export var frame_contiunity : bool = true
 
 ## How many frames are generated for the trail  
@@ -40,11 +49,7 @@ signal frame_spawned(frame : Sprite2D)
 ## A direction frames should move toward as they fade out, offseted by their current position 
 @export var frame_final_pos_offset : Vector2 = Vector2(0, 0)
 
-@export_group("")
-## The sprite to copy for the effect (Needs to be set for the effect to work!) 
-@export var sprite_to_copy : Sprite2D 
-## If the effect should be turned on  
-@export var emiting : bool = true
+
 
 
 

@@ -36,3 +36,4 @@ func update_sprite():
 	self.vframes = _after_image_parrent.sprite_to_copy.vframes
 	self.global_scale = _after_image_parrent.sprite_to_copy.global_scale
 	self.global_rotation = _after_image_parrent.sprite_to_copy.global_rotation
+	self.global_skew = _after_image_parrent.sprite_to_copy.global_skew
