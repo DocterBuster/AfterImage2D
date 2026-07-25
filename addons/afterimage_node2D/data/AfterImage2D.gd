@@ -5,6 +5,8 @@ extends Node2D
 ## Frame preload 
 var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFrame2D.tscn")
 
+
+## Members
 @export_group("Frame Properties")
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
 @export var do_fade = true
@@ -16,8 +18,11 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 ## How long should the fade be? 
 @export var fade_time : float = 1.0
 
+## The starting Alpha modulate of the sprite frame when it is displayed 
+@export_range(0.0, 1.0) var starting_alpha : float = 1.0
+
 @export_group("")
-## The sprite to copy for the effect
+## The sprite to copy for the effect (Needs to be set for the effect to work!) 
 @export var sprite_to_copy : Sprite2D 
 
 
@@ -45,10 +50,6 @@ func _update_trail_amount():
 			trail_objects[i].free()
 			trail_objects.remove_at(i)
 
-
-
-
-
 #endregion 
 
 
@@ -56,6 +57,9 @@ func _update_trail_amount():
 
 
 func _process(delta: float) -> void:
+	
+	## How long to wait is dependent on the frame count and fade time 
+	var next_wait_invertal : float = fade_time / trail_amount
 	
 	pass
 
