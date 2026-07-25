@@ -22,6 +22,10 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 
 ## The starting Alpha modulate of the sprite frame when it is displayed 
 @export_range(0.0, 1.0) var starting_alpha : float = 1.0
+## If if to use frame_color_overide to replace the color of the sprite frame with a monochrome version 
+@export var overide_frame_color : bool = true 
+## if overide_frame_color is true, the color to make the frames apear 
+@export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
 
 @export_group("")
 ## The sprite to copy for the effect (Needs to be set for the effect to work!) 
@@ -85,8 +89,11 @@ func _copy_sprite_to_index(index : int):
 	trail_objects[0].texture = sprite_to_copy.texture
 	trail_objects[0].position = global_position ## Postion of emmiter 
 	trail_objects[0].global_scale = sprite_to_copy.global_scale
-	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, 1.0)
-	pass
+	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, starting_alpha)
+	
+	## Set shadr param
+	trail_objects[0].material.set_shader_parameter("enable", overide_frame_color)
+	trail_objects[0].material.set_shader_parameter("monochrome_color", frame_color_overide)
 
 
 #endregion 
