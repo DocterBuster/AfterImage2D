@@ -16,7 +16,11 @@ signal frame_spawned(frame : Sprite2D)
 ## Members
 @export_group("Frame Properties")
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
-@export var do_fade = true
+@export var do_fade : bool = true
+
+## If the effect should use the frame of the sprite when it was spawned or match what is displayed on the sprite
+@export var frame_contiunity : bool = true
+
 ## How many frames are generated for the trail  
 @export var trail_amount : int = 3:
 	set(value):
@@ -61,6 +65,7 @@ func _update_trail_amount():
 		## Add objects from the trail starting at the backmost index
 		for i in range(0, trail_amount - trail_objects.size()):
 			var frame : AfterImage2DFrame = image_frame_ref.instantiate()
+			frame._after_image_parrent = self
 			trail_objects.append(frame)
 			add_child(frame)
 	elif(trail_objects.size() > trail_amount):
@@ -102,17 +107,14 @@ func _copy_sprite_to_index(index : int):
 	##Reparent to topmost child 
 	move_child(trail_objects[0], get_child_count() - 1)
 	
-	## Set position to emmiter position 
+	## Set position to emmiter position to start
 	trail_objects[0].position = global_position ## Postion of emmiter 
 	
-	## Copy node data
-	trail_objects[0].texture = sprite_to_copy.texture
-	trail_objects[0].frame = sprite_to_copy.frame
-	trail_objects[0].hframes = sprite_to_copy.hframes
-	trail_objects[0].vframes = sprite_to_copy.vframes
-	trail_objects[0].global_scale = sprite_to_copy.global_scale
-	trail_objects[0].global_rotation = sprite_to_copy.global_rotation
+	## Set starting alpha modulate
 	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, starting_alpha)
+	
+	## Call update function
+	trail_objects[0].update_sprite()
 	
 	## Set shadr parameters
 	trail_objects[0].material.set_shader_parameter("enable", overide_frame_color)
