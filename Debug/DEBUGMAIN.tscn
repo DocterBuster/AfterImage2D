@@ -19,19 +19,21 @@ position = Vector2(576.5, 0)
 shape = SubResource("RectangleShape2D_sx2jc")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=355867845]
-position = Vector2(343, 492)
+position = Vector2(496, 444)
 script = ExtResource("1_o207e")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1273867318]
+modulate = Color(0, 0.23529412, 1, 1)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("2_gn5qp")
 
 [node name="AfterImage2D" type="Node2D" parent="CharacterBody2D" unique_id=1455878134 node_paths=PackedStringArray("sprite_to_copy")]
 script = ExtResource("1_rwugh")
 do_fade = false
 trail_amount = 4
+fade_time = 0.3
 sprite_to_copy = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1273867318]
-scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("2_gn5qp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=654934063]
 shape = SubResource("CapsuleShape2D_yklw0")

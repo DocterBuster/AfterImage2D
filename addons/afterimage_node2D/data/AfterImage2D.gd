@@ -1,4 +1,6 @@
 @tool
+## An object that spawns copies of a sprite and fades them out to produce a visual effect 
+class_name AfterImage2D
 extends Node2D
 
 
@@ -24,6 +26,8 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 @export_group("")
 ## The sprite to copy for the effect (Needs to be set for the effect to work!) 
 @export var sprite_to_copy : Sprite2D 
+## If the effect should be turned on  
+@export var emiting : bool = true
 
 
 
@@ -37,7 +41,6 @@ var trail_objects : Array[AfterImage2DFrame] = []
 
 ## Updates the trail amount, called when trail_amount is changed 
 func _update_trail_amount():
-	
 	if(trail_objects.size() < trail_amount):
 		## Add objects from the trail starting at the backmost index
 		for i in range(0, trail_amount - trail_objects.size()):
@@ -55,14 +58,35 @@ func _update_trail_amount():
 
 #region Visual Effect
 
+var wait_finished = true
 
 func _process(delta: float) -> void:
 	
-	## How long to wait is dependent on the frame count and fade time 
-	var next_wait_invertal : float = fade_time / trail_amount
-	
-	pass
+	if(emiting and wait_finished):
+		## How long to wait is dependent on the frame count and fade time 
+		var next_wait_invertal : float = fade_time / trail_amount
+		
+		
+		## Select the first index of the array and copy data to it
+		_copy_sprite_to_index(0)
+		
+		## Then tell that frame to play!
+		trail_objects[0].start_fade(fade_time)
+		## After priming, send the index to the back of the array! 
+		trail_objects.push_back(trail_objects.pop_front())
+		
+		## lastly, wait for the interal to pass
+		wait_finished = false
+		await get_tree().create_timer(next_wait_invertal).timeout
+		wait_finished = true
 
+## (INTERNAL HELPER) Copies the selected sprite's data to an index of the array (typicaly 0) 
+func _copy_sprite_to_index(index : int):
+	trail_objects[0].texture = sprite_to_copy.texture
+	trail_objects[0].position = global_position ## Postion of emmiter 
+	trail_objects[0].global_scale = sprite_to_copy.global_scale
+	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, 1.0)
+	pass
 
 
 #endregion 
@@ -70,9 +94,4 @@ func _process(delta: float) -> void:
 
 ## Hides all frames of the AfterImage2D object instantly 
 func hide_all_frames() -> void:
-	pass
-
-
-
-func _enter_tree() -> void:
 	pass
