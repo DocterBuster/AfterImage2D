@@ -5,10 +5,6 @@ extends Node2D
 ## Frame preload 
 var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFrame2D.tscn")
 
-@export_group("Editor")
-## If the effect should play in the editor
-@export var play_in_editor : bool = false 
-
 @export_group("Frame Properties")
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
 @export var do_fade = true
@@ -60,6 +56,7 @@ func _update_trail_amount():
 
 
 func _process(delta: float) -> void:
+	
 	pass
 
 

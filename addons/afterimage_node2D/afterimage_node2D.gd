@@ -14,7 +14,7 @@ func _disable_plugin() -> void:
 
 func _enter_tree() -> void:
 	# Initialization of the plugin goes here.
-	add_custom_type("AfterImage2D", "Node2D", preload("./data/AfterImage2D.gd"), preload("./data/i.svg"))
+	add_custom_type("AfterImage2D", "Node2D", preload("./data/AfterImage2D.gd"), preload("./data/AfterImage2D.png"))
 
 
 func _exit_tree() -> void:

@@ -25,7 +25,7 @@ script = ExtResource("1_o207e")
 [node name="AfterImage2D" type="Node2D" parent="CharacterBody2D" unique_id=1455878134 node_paths=PackedStringArray("sprite_to_copy")]
 script = ExtResource("1_rwugh")
 do_fade = false
-trail_amount = 10
+trail_amount = 4
 sprite_to_copy = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 
