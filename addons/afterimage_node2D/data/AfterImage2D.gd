@@ -86,12 +86,20 @@ func _process(delta: float) -> void:
 
 ## (INTERNAL HELPER) Copies the selected sprite's data to an index of the array (typicaly 0) 
 func _copy_sprite_to_index(index : int):
-	trail_objects[0].texture = sprite_to_copy.texture
+	
+	## Set position to emmiter position 
 	trail_objects[0].position = global_position ## Postion of emmiter 
+	
+	## Copy node data
+	trail_objects[0].texture = sprite_to_copy.texture
+	trail_objects[0].frame = sprite_to_copy.frame
+	trail_objects[0].hframes = sprite_to_copy.hframes
+	trail_objects[0].vframes = sprite_to_copy.vframes
 	trail_objects[0].global_scale = sprite_to_copy.global_scale
+	trail_objects[0].global_rotation = sprite_to_copy.global_rotation
 	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, starting_alpha)
 	
-	## Set shadr param
+	## Set shadr parameters
 	trail_objects[0].material.set_shader_parameter("enable", overide_frame_color)
 	trail_objects[0].material.set_shader_parameter("monochrome_color", frame_color_overide)
 

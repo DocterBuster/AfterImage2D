@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cv28cqmiedb8p" path="res://addons/afterimage_node2D/data/after_image_frame_2d.gd" id="2_6wlp1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yklw0"]
+resource_local_to_scene = true
 shader = ExtResource("1_7p4no")
 shader_parameter/monochrome_color = Color(1, 1, 1, 1)
 shader_parameter/enable = false

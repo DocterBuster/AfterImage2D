@@ -7,19 +7,47 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx2jc"]
 size = Vector2(1173, 20)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_o207e"]
+radius = 78.00641
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yklw0"]
 
 [node name="Debugmain" type="Node2D" unique_id=1558773029]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=491638218]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=671856109]
 position = Vector2(9, 624)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=292228729]
+position = Vector2(576.5, 0)
+shape = SubResource("RectangleShape2D_sx2jc")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="StaticBody2D2" unique_id=759513194]
+position = Vector2(1013, -407)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2/RigidBody2D" unique_id=943120390]
+shape = SubResource("CircleShape2D_o207e")
+
+[node name="AfterImage2D" type="Node2D" parent="StaticBody2D2/RigidBody2D" unique_id=592413768 node_paths=PackedStringArray("sprite_to_copy")]
+rotation = -0.15707964
+script = ExtResource("1_rwugh")
+trail_amount = 10
+sprite_to_copy = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2/RigidBody2D" unique_id=1610617419]
+z_index = 1
+texture = ExtResource("2_gn5qp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=491638218]
+position = Vector2(194, 730)
+rotation = -0.4537856
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=609929619]
 position = Vector2(576.5, 0)
 shape = SubResource("RectangleShape2D_sx2jc")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=355867845]
-position = Vector2(496, 444)
+position = Vector2(410, 374)
 script = ExtResource("1_o207e")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1273867318]
@@ -29,9 +57,10 @@ texture = ExtResource("2_gn5qp")
 
 [node name="AfterImage2D" type="Node2D" parent="CharacterBody2D" unique_id=1455878134 node_paths=PackedStringArray("sprite_to_copy")]
 script = ExtResource("1_rwugh")
-do_fade = false
-trail_amount = 4
+trail_amount = 10
 fade_time = 0.3
+starting_alpha = 0.375
+frame_color_overide = Color(0, 1, 1, 1)
 sprite_to_copy = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 
