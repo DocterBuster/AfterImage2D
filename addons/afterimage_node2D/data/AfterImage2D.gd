@@ -7,6 +7,11 @@ extends Node2D
 ## Frame preload 
 var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFrame2D.tscn")
 
+## Signals
+
+## Called when a frame is spawned, passing that frame to be overided or modified 
+signal frame_spawned(frame : Sprite2D)
+
 
 ## Members
 @export_group("Frame Properties")
@@ -82,7 +87,7 @@ func _process(delta: float) -> void:
 		_copy_sprite_to_index(0)
 		
 		## Then tell that frame to play!
-		trail_objects[0].start_fade(fade_time, frame_final_pos_offset)
+		trail_objects[0].start_fade(do_fade, fade_time, frame_final_pos_offset)
 		## After priming, send the index to the back of the array! 
 		trail_objects.push_back(trail_objects.pop_front())
 		
@@ -112,6 +117,9 @@ func _copy_sprite_to_index(index : int):
 	## Set shadr parameters
 	trail_objects[0].material.set_shader_parameter("enable", overide_frame_color)
 	trail_objects[0].material.set_shader_parameter("monochrome_color", frame_color_overide)
+	
+	## Emit Signal for frame spawn
+	frame_spawned.emit(trail_objects[0])
 
 
 #endregion 
