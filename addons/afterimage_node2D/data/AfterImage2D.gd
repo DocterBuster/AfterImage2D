@@ -117,7 +117,8 @@ func _copy_sprite_to_index(index : int):
 	trail_objects[0].position = global_position ## Postion of emmiter 
 	
 	## Set starting alpha modulate
-	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, starting_alpha)
+	trail_objects[0].modulate = modulate
+	trail_objects[0].modulate.a = starting_alpha
 	
 	## Call update function
 	trail_objects[0].update_sprite()
