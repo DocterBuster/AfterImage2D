@@ -7,11 +7,29 @@ extends Node2D
 ## Frame preload 
 var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFrame2D.tscn")
 
+## Signals
+
+## Called when a frame is spawned, passing that frame to be overided or modified 
+signal frame_spawned(frame : Sprite2D)
+
 
 ## Members
+
+@export_group("")
+## If the effect should be turned on  
+@export var emiting : bool = true
+## The sprite to copy for the effect (Needs to be set for the effect to work!) 
+@export var sprite_to_copy : Sprite2D 
+
+
 @export_group("Frame Properties")
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
-@export var do_fade = true
+@export var do_fade : bool = true
+
+## If the effect should use the frame of the sprite when it was spawned or match what is displayed on the sprite
+## (Note: setting this to false is more preformance intensive!) 
+@export var frame_contiunity : bool = true
+
 ## How many frames are generated for the trail  
 @export var trail_amount : int = 3:
 	set(value):
@@ -23,19 +41,16 @@ var image_frame_ref = preload("res://addons/afterimage_node2D/data/AfterImageFra
 ## The starting Alpha modulate of the sprite frame when it is displayed 
 @export_range(0.0, 1.0) var starting_alpha : float = 1.0
 ## If if to use frame_color_overide to replace the color of the sprite frame with a monochrome version 
-@export var overide_frame_color : bool = true 
+## (Uses the Modulate Property) 
+@export var overide_frame_modulate : bool = true 
 ## if overide_frame_color is true, the color to make the frames apear 
-@export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
+#@export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
 
 @export_group("Frame Physics")
 ## A direction frames should move toward as they fade out, offseted by their current position 
 @export var frame_final_pos_offset : Vector2 = Vector2(0, 0)
 
-@export_group("")
-## The sprite to copy for the effect (Needs to be set for the effect to work!) 
-@export var sprite_to_copy : Sprite2D 
-## If the effect should be turned on  
-@export var emiting : bool = true
+
 
 
 
@@ -56,6 +71,7 @@ func _update_trail_amount():
 		## Add objects from the trail starting at the backmost index
 		for i in range(0, trail_amount - trail_objects.size()):
 			var frame : AfterImage2DFrame = image_frame_ref.instantiate()
+			frame._after_image_parrent = self
 			trail_objects.append(frame)
 			add_child(frame)
 	elif(trail_objects.size() > trail_amount):
@@ -82,7 +98,7 @@ func _process(delta: float) -> void:
 		_copy_sprite_to_index(0)
 		
 		## Then tell that frame to play!
-		trail_objects[0].start_fade(fade_time, frame_final_pos_offset)
+		trail_objects[0].start_fade(do_fade, fade_time, frame_final_pos_offset)
 		## After priming, send the index to the back of the array! 
 		trail_objects.push_back(trail_objects.pop_front())
 		
@@ -94,21 +110,27 @@ func _process(delta: float) -> void:
 ## (INTERNAL HELPER) Copies the selected sprite's data to an index of the array (typicaly 0) 
 func _copy_sprite_to_index(index : int):
 	
-	## Set position to emmiter position 
+	##Reparent to topmost child 
+	move_child(trail_objects[0], get_child_count() - 1)
+	
+	## Set position to emmiter position to start
 	trail_objects[0].position = global_position ## Postion of emmiter 
 	
-	## Copy node data
-	trail_objects[0].texture = sprite_to_copy.texture
-	trail_objects[0].frame = sprite_to_copy.frame
-	trail_objects[0].hframes = sprite_to_copy.hframes
-	trail_objects[0].vframes = sprite_to_copy.vframes
-	trail_objects[0].global_scale = sprite_to_copy.global_scale
-	trail_objects[0].global_rotation = sprite_to_copy.global_rotation
+	## Set starting alpha modulate
 	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, starting_alpha)
 	
+	## Call update function
+	trail_objects[0].update_sprite()
+	
+	## Emit Signal for frame spawn (Before shader) 
+	frame_spawned.emit(trail_objects[0])
+	
 	## Set shadr parameters
-	trail_objects[0].material.set_shader_parameter("enable", overide_frame_color)
-	trail_objects[0].material.set_shader_parameter("monochrome_color", frame_color_overide)
+	trail_objects[0].material.set_shader_parameter("enable", overide_frame_modulate)
+	trail_objects[0].material.set_shader_parameter("monochrome_color", modulate)
+	
+
+
 
 
 #endregion 
