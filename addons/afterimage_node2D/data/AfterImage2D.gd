@@ -89,7 +89,7 @@ var wait_finished = true
 
 func _process(delta: float) -> void:
 	
-	if(emiting and wait_finished and trail_objects.size() > 0):
+	if(emiting and wait_finished and trail_objects.size() > 0 and sprite_to_copy):
 		## How long to wait is dependent on the frame count and fade time 
 		var next_wait_invertal : float = fade_time / trail_amount
 		
