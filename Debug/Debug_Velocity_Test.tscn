@@ -102,7 +102,7 @@ script = ExtResource("2_0gpev")
 sprite_to_copy = NodePath("../SprRoaringknightIdle")
 trail_amount = 5
 starting_alpha = 0.5
-overide_frame_color = false
+overide_frame_modulate = false
 frame_final_pos_offset = Vector2(100, 0)
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 

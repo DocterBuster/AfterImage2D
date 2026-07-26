@@ -60,8 +60,9 @@ sprite_to_copy = NodePath("../Sprite2D")
 trail_amount = 10
 fade_time = 0.3
 starting_alpha = 0.375
-frame_color_overide = Color(0, 1, 1, 1)
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=654934063]
 shape = SubResource("CapsuleShape2D_yklw0")
+
+[connection signal="frame_spawned" from="CharacterBody2D/AfterImage2D" to="CharacterBody2D" method="_on_after_image_2d_frame_spawned"]

@@ -41,9 +41,10 @@ signal frame_spawned(frame : Sprite2D)
 ## The starting Alpha modulate of the sprite frame when it is displayed 
 @export_range(0.0, 1.0) var starting_alpha : float = 1.0
 ## If if to use frame_color_overide to replace the color of the sprite frame with a monochrome version 
-@export var overide_frame_color : bool = true 
+## (Uses the Modulate Property) 
+@export var overide_frame_modulate : bool = true 
 ## if overide_frame_color is true, the color to make the frames apear 
-@export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
+#@export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
 
 @export_group("Frame Physics")
 ## A direction frames should move toward as they fade out, offseted by their current position 
@@ -121,12 +122,15 @@ func _copy_sprite_to_index(index : int):
 	## Call update function
 	trail_objects[0].update_sprite()
 	
-	## Set shadr parameters
-	trail_objects[0].material.set_shader_parameter("enable", overide_frame_color)
-	trail_objects[0].material.set_shader_parameter("monochrome_color", frame_color_overide)
-	
-	## Emit Signal for frame spawn
+	## Emit Signal for frame spawn (Before shader) 
 	frame_spawned.emit(trail_objects[0])
+	
+	## Set shadr parameters
+	trail_objects[0].material.set_shader_parameter("enable", overide_frame_modulate)
+	trail_objects[0].material.set_shader_parameter("monochrome_color", modulate)
+	
+
+
 
 
 #endregion 

@@ -23,3 +23,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_after_image_2d_frame_spawned(frame: Sprite2D) -> void:
+	
+	$AfterImage2D.modulate = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1))
