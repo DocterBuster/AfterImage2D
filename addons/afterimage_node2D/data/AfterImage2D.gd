@@ -31,18 +31,18 @@ signal frame_spawned(frame : Sprite2D)
 @export var frame_contiunity : bool = true
 
 ## How many frames are generated for the trail  
-@export var trail_amount : int = 3:
+@export_range(0, 999999) var trail_amount : int = 3:
 	set(value):
 		trail_amount = value
 		_update_trail_amount()
 ## How long should the fade be? 
-@export var fade_time : float = 0.5
+@export_range(0, 999999) var fade_time : float = 0.5
 
 ## The starting Alpha modulate of the sprite frame when it is displayed 
 @export_range(0.0, 1.0) var starting_alpha : float = 1.0
-## If if to use frame_color_overide to replace the color of the sprite frame with a monochrome version 
-## (Uses the Modulate Property) 
-@export var overide_frame_modulate : bool = true 
+## Sets the frames to be a monochrome sprite shader
+## (Uses the Modulate Property for color) 
+@export var monochrome_modulate : bool = true 
 ## if overide_frame_color is true, the color to make the frames apear 
 #@export_color_no_alpha var frame_color_overide : Color = Color(1.0, 1.0, 1.0, 1.0)
 
@@ -89,7 +89,7 @@ var wait_finished = true
 
 func _process(delta: float) -> void:
 	
-	if(emiting and wait_finished and trail_objects.size() > 0):
+	if(emiting and wait_finished and trail_objects.size() > 0 and sprite_to_copy):
 		## How long to wait is dependent on the frame count and fade time 
 		var next_wait_invertal : float = fade_time / trail_amount
 		
@@ -117,7 +117,8 @@ func _copy_sprite_to_index(index : int):
 	trail_objects[0].position = global_position ## Postion of emmiter 
 	
 	## Set starting alpha modulate
-	trail_objects[0].modulate = Color(1.0, 1.0, 1.0, starting_alpha)
+	trail_objects[0].modulate = modulate
+	trail_objects[0].modulate.a = starting_alpha
 	
 	## Call update function
 	trail_objects[0].update_sprite()
@@ -126,7 +127,7 @@ func _copy_sprite_to_index(index : int):
 	frame_spawned.emit(trail_objects[0])
 	
 	## Set shadr parameters
-	trail_objects[0].material.set_shader_parameter("enable", overide_frame_modulate)
+	trail_objects[0].material.set_shader_parameter("enable", monochrome_modulate)
 	trail_objects[0].material.set_shader_parameter("monochrome_color", modulate)
 	
 

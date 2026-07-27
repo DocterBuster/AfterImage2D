@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="AfterImage"
+config/name="AfterImage2D"
 run/main_scene="uid://bqcjbq57ndsv0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://43ojnostktu"
 
 [display]
 

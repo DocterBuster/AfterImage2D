@@ -21,7 +21,7 @@ func start_fade(do_fade : bool, time : float, final_offset : Vector2):
 		can_start = false
 		var tween : Tween = create_tween()
 		tween.set_parallel()
-		if(do_fade): tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 0.0), time)
+		if(do_fade): tween.tween_property(self, "modulate", Color(modulate.r, modulate.g, modulate.b, 0.0), time)
 		tween.tween_property(self, "position", position + final_offset, time)
 		await tween.finished
 		can_start = true
