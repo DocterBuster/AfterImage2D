@@ -30,10 +30,22 @@ func start_fade(do_fade : bool, time : float, final_offset : Vector2):
 ## Updates the image frame to match the bound sprite
 func update_sprite():
 	## Copy node data
+	self.global_scale = _after_image_parrent.sprite_to_copy.global_scale
+	self.global_rotation = _after_image_parrent.sprite_to_copy.global_rotation
+	self.global_skew = _after_image_parrent.sprite_to_copy.global_skew
+	
+	## Sprite info
 	self.texture = _after_image_parrent.sprite_to_copy.texture
 	self.frame = _after_image_parrent.sprite_to_copy.frame
 	self.hframes = _after_image_parrent.sprite_to_copy.hframes
 	self.vframes = _after_image_parrent.sprite_to_copy.vframes
-	self.global_scale = _after_image_parrent.sprite_to_copy.global_scale
-	self.global_rotation = _after_image_parrent.sprite_to_copy.global_rotation
-	self.global_skew = _after_image_parrent.sprite_to_copy.global_skew
+	self.frame_coords = _after_image_parrent.sprite_to_copy.frame_coords
+	
+	self.centered = _after_image_parrent.sprite_to_copy.centered
+	self.offset = _after_image_parrent.sprite_to_copy.offset
+	self.flip_h = _after_image_parrent.sprite_to_copy.flip_h
+	self.flip_v = _after_image_parrent.sprite_to_copy.flip_v
+	
+	self.region_enabled = _after_image_parrent.sprite_to_copy.region_enabled
+	self.region_rect = _after_image_parrent.sprite_to_copy.region_rect
+	self.region_filter_clip_enabled = _after_image_parrent.sprite_to_copy.region_filter_clip_enabled

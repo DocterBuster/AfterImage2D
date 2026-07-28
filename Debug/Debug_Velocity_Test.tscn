@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://csnjaibncnpig" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/spr_roaringknight_idle.png" id="1_2lfwe"]
 [ext_resource type="Script" uid="uid://b3ireb5lb8rf1" path="res://addons/afterimage_node2D/data/AfterImage2D.gd" id="2_0gpev"]
 [ext_resource type="Texture2D" uid="uid://blv0801hbghth" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/spr_roaringknight_attack_ol/spr_roaringknight_attack_ol_0.png" id="3_1ccrc"]
+[ext_resource type="Texture2D" uid="uid://bs4slhikd2uqi" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/brackeys_platformer_assets/sprites/knight.png" id="3_gpnui"]
 [ext_resource type="Texture2D" uid="uid://bv73hnrg0uib4" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/spr_roaringknight_attack_ol/spr_roaringknight_attack_ol_1.png" id="4_gpnui"]
 [ext_resource type="Texture2D" uid="uid://b356koiaqqvhi" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/spr_roaringknight_attack_ol/spr_roaringknight_attack_ol_2.png" id="5_rm4bm"]
 [ext_resource type="Texture2D" uid="uid://cxrw11b321c46" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/spr_roaringknight_attack_ol/spr_roaringknight_attack_ol_3.png" id="6_06h0r"]
@@ -61,7 +62,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_2lfwe")]
+"values": [ExtResource("3_gpnui")]
 }
 
 [sub_resource type="Animation" id="Animation_pqlhb"]
@@ -96,6 +97,9 @@ position = Vector2(693, 231)
 z_index = 1
 scale = Vector2(2, 2)
 texture = ExtResource("1_2lfwe")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 34.53762, 38.29112)
 
 [node name="AfterImage2D" type="Node2D" parent="AngleTest" unique_id=1988996881 node_paths=PackedStringArray("sprite_to_copy")]
 scale = Vector2(0.91, 1)
