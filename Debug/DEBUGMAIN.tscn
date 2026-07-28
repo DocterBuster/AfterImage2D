@@ -88,6 +88,7 @@ shape = SubResource("RectangleShape2D_sx2jc")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=759513194]
 position = Vector2(1022, 217)
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=943120390]
 shape = SubResource("CircleShape2D_o207e")
@@ -122,8 +123,9 @@ region_rect = Rect2(0, 0, 256, 256)
 script = ExtResource("1_rwugh")
 sprite_to_copy = NodePath("../Sprite2D")
 trail_amount = 10
-fade_time = 0.3
+fade_time = 1.0
 starting_alpha = 0.375
+monochrome_modulate = false
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=654934063]
