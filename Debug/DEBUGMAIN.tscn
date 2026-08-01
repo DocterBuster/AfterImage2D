@@ -11,7 +11,7 @@ size = Vector2(2356, 19)
 radius = 78.00641
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynfes"]
-size = Vector2(1017, 242.5)
+size = Vector2(1017, 325)
 
 [node name="Debugmain" type="Node2D" unique_id=1558773029]
 
@@ -39,7 +39,8 @@ shape = SubResource("RectangleShape2D_sx2jc")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=759513194]
 position = Vector2(1022, 217)
-collision_layer = 0
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=943120390]
 shape = SubResource("CircleShape2D_o207e")
@@ -64,10 +65,12 @@ rotation_smoothing_enabled = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=654268871]
 position = Vector2(226, 240)
+collision_layer = 3
+collision_mask = 3
 gravity_space_override = 3
 gravity_point_center = Vector2(0, -1)
 gravity_direction = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1373928497]
-position = Vector2(-223.5, -100.75)
+position = Vector2(-223.5, -59.5)
 shape = SubResource("RectangleShape2D_ynfes")
