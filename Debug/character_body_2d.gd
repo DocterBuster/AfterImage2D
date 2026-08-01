@@ -1,40 +1,48 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+
 const JUMP_VELOCITY = -800.0
 
 
+const SPEED = 50.0
+const SLOWDOWN_RATIO = 0.5
+const MAX_SPEED = 500.0
+
 @onready var sprite : Sprite2D = $Sprite2D
 
+
+var calc_velocity : Vector2 = Vector2.ZERO
+
 func _physics_process(delta: float) -> void:
+	
+	calc_velocity = velocity.rotated(-rotation)
+	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		calc_velocity += get_gravity() * delta
 
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
-		velocity.x = direction * SPEED
-		sprite.flip_h = sign(velocity.x) == -1
+		calc_velocity.x += direction * SPEED
+		calc_velocity.x = clampf(calc_velocity.x, -MAX_SPEED, MAX_SPEED)
+		sprite.flip_h = sign(calc_velocity.x) == -1
 		if(is_on_floor()):
 			$AnimationPlayer.play("walk")
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+		calc_velocity.x = move_toward(calc_velocity.x, 0, SPEED * SLOWDOWN_RATIO)
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		calc_velocity.y += JUMP_VELOCITY
 		$AnimationPlayer.play("jump")
-		var tween : Tween = create_tween()
-		tween.set_ease(Tween.EASE_IN_OUT)
-
-		tween.tween_property(self, "rotation", 2 * PI, 0.75).from(0)
 	
-	
+	## Rotate velcoty based on current rotation & add it!
+	calc_velocity = calc_velocity.rotated(rotation)
+	velocity = calc_velocity
 
 	
 	move_and_slide()
