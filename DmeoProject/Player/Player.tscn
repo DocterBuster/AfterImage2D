@@ -82,7 +82,7 @@ script = ExtResource("3_twcv3")
 sprite_to_copy = NodePath("../Sprite2D")
 trail_amount = 10
 fade_time = 1.0
-starting_alpha = 0.477
+starting_alpha = 0.5
 monochrome_modulate = false
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 

@@ -16,15 +16,22 @@ func _process(delta: float) -> void:
 			update_sprite()
 
 ## Starts the fade visual & set can_start flag
-func start_fade(do_fade : bool, time : float, final_offset : Vector2):
+func start_fade(time : float, final_offset : Vector2):
 	if(can_start):
 		can_start = false
 		var tween : Tween = create_tween()
 		tween.set_parallel()
-		if(do_fade): tween.tween_property(self, "modulate", Color(modulate.r, modulate.g, modulate.b, 0.0), time)
+		tween.tween_method(evaulate_alpha_curve, 0.0, 1.0, time)
+		#tween.tween_property(self, "modulate", Color(modulate.r, modulate.g, modulate.b, _after_image_parrent.ending_alpha), time)
 		tween.tween_property(self, "position", position + final_offset, time)
 		await tween.finished
 		can_start = true
+
+
+## Evaulates the alpha value of the curve from a tween_method call
+func evaulate_alpha_curve(progress : float):
+	var curve_value = _after_image_parrent.alpha_curve.sample(progress)
+	self.modulate.a = lerp(0.0, 1.0, curve_value)
 
 
 ## Updates the image frame to match the bound sprite
