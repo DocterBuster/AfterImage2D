@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x += direction * SPEED
 		velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
-		sprite.flip_h = sign(velocity.x) == -1
+		sprite.flip_h = sign(direction) == up_direction.y
 		if(is_on_floor()):
 			$AnimationPlayer.play("walk")
 	else:
