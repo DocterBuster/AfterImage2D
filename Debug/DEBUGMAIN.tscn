@@ -49,8 +49,6 @@ shape = SubResource("CircleShape2D_o207e")
 rotation = -0.15707964
 script = ExtResource("1_rwugh")
 sprite_to_copy = NodePath("../Sprite2D")
-do_fade = true
-ending_alpha = null
 metadata/_custom_type_script = "uid://b3ireb5lb8rf1"
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=1610617419]

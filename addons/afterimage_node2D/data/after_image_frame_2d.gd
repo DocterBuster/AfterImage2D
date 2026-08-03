@@ -30,8 +30,12 @@ func start_fade(time : float, final_offset : Vector2):
 
 ## Evaulates the alpha value of the curve from a tween_method call
 func evaulate_alpha_curve(progress : float):
-	var curve_value = _after_image_parrent.alpha_curve.sample(progress)
-	self.modulate.a = lerp(0.0, 1.0, curve_value)
+	if(_after_image_parrent.alpha_curve):
+		var curve_value = _after_image_parrent.alpha_curve.sample(progress)
+		self.modulate.a = lerp(0.0, 1.0, curve_value)
+	else:
+		## Default to liner fade from 1.0 to 0.0
+		self.modulate.a = abs(1.0 - progress)
 
 
 ## Updates the image frame to match the bound sprite

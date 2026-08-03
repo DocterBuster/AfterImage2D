@@ -125,7 +125,10 @@ func _copy_sprite_to_index(index : int):
 	
 	## Set starting alpha modulate
 	trail_objects[0].modulate = modulate
-	trail_objects[0].modulate.a = alpha_curve.sample(0.0) ## Get starting value of curve
+	if(alpha_curve):
+		trail_objects[0].modulate.a = alpha_curve.sample(0.0) ## Get starting value of curve
+	else:
+		trail_objects[0].modulate.a = 1.0
 	
 	## Call update function
 	trail_objects[0].update_sprite()
