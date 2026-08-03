@@ -21,10 +21,13 @@ signal frame_spawned(frame : Sprite2D)
 ## The sprite to copy for the effect (Needs to be set for the effect to work!) 
 @export var sprite_to_copy : Sprite2D 
 
+## The Curve of the alpha values to follow over the lifetime of the fade
+@export var alpha_curve : Curve
+
 
 @export_group("Frame Properties")
 ## Should the effect fade at all? (Only disable if you are using the system for another purpose!) 
-@export var do_fade : bool = true
+#@export var do_fade : bool = true
 
 ## If the effect should use the frame of the sprite when it was spawned or match what is displayed on the sprite
 ## (Note: setting this to false is more preformance intensive!) 
@@ -38,8 +41,13 @@ signal frame_spawned(frame : Sprite2D)
 ## How long should the fade be? 
 @export_range(0, 999999) var fade_time : float = 0.5
 
-## The starting Alpha modulate of the sprite frame when it is displayed 
-@export_range(0.0, 1.0) var starting_alpha : float = 1.0
+
+
+
+### The starting Alpha modulate of the sprite frame when it is displayed 
+#@export_range(0.0, 1.0) var starting_alpha : float = 1.0
+### The ending Alpha modulate of the sprite frame when it is at the end of the Fade Time
+#@export_range(0.0, 1.0) var ending_alpha : float = 0.0
 ## Sets the frames to be a monochrome sprite shader
 ## (Uses the Modulate Property for color) 
 @export var monochrome_modulate : bool = true 
@@ -93,12 +101,11 @@ func _process(delta: float) -> void:
 		## How long to wait is dependent on the frame count and fade time 
 		var next_wait_invertal : float = fade_time / trail_amount
 		
-		
 		## Select the first index of the array and copy data to it
 		_copy_sprite_to_index(0)
 		
 		## Then tell that frame to play!
-		trail_objects[0].start_fade(do_fade, fade_time, frame_final_pos_offset)
+		trail_objects[0].start_fade(fade_time, frame_final_pos_offset)
 		## After priming, send the index to the back of the array! 
 		trail_objects.push_back(trail_objects.pop_front())
 		
@@ -118,7 +125,10 @@ func _copy_sprite_to_index(index : int):
 	
 	## Set starting alpha modulate
 	trail_objects[0].modulate = modulate
-	trail_objects[0].modulate.a = starting_alpha
+	if(alpha_curve):
+		trail_objects[0].modulate.a = alpha_curve.sample(0.0) ## Get starting value of curve
+	else:
+		trail_objects[0].modulate.a = 1.0
 	
 	## Call update function
 	trail_objects[0].update_sprite()
@@ -129,7 +139,6 @@ func _copy_sprite_to_index(index : int):
 	## Set shadr parameters
 	trail_objects[0].material.set_shader_parameter("enable", monochrome_modulate)
 	trail_objects[0].material.set_shader_parameter("monochrome_color", modulate)
-	
 
 
 
