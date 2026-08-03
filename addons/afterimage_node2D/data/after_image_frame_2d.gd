@@ -47,10 +47,10 @@ func update_sprite():
 	
 	## Sprite info
 	self.texture = _after_image_parrent.sprite_to_copy.texture
-	self.frame = _after_image_parrent.sprite_to_copy.frame
 	self.hframes = _after_image_parrent.sprite_to_copy.hframes
 	self.vframes = _after_image_parrent.sprite_to_copy.vframes
 	self.frame_coords = _after_image_parrent.sprite_to_copy.frame_coords
+	self.frame = _after_image_parrent.sprite_to_copy.frame
 	
 	self.centered = _after_image_parrent.sprite_to_copy.centered
 	self.offset = _after_image_parrent.sprite_to_copy.offset

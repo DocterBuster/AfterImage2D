@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c8oof4dw4vpxw" path="res://Art/ThingsIDidNotMakeDoNotSueMePlease/spr_roaringknight_attack_ol/spr_roaringknight_attack_ol_5.png" id="8_7gqjy"]
 
 [sub_resource type="Curve" id="Curve_gpnui"]
-_data = [Vector2(0, 0.5), 0.0, -0.5, 0, 1, Vector2(1, 0), -0.5, 0.0, 1, 0]
+_data = [Vector2(0, 0.51680666), 0.0, -0.51680666, 0, 1, Vector2(1, 0), -0.51680666, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="Animation" id="Animation_0gpev"]
