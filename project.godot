@@ -29,7 +29,7 @@ enabled=PackedStringArray("res://addons/afterimage_node2D/plugin.cfg")
 folder_colors={
 "res://Art/": "pink",
 "res://Debug/": "green",
-"res://DmeoProject/": "red",
+"res://DemoProject/": "red",
 "res://addons/": "purple"
 }
 

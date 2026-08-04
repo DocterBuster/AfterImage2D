@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b3ireb5lb8rf1" path="res://addons/afterimage_node2D/data/AfterImage2D.gd" id="1_rwugh"]
 [ext_resource type="Texture2D" uid="uid://iqo2n3a8wdt7" path="res://icon.svg" id="2_gn5qp"]
-[ext_resource type="PackedScene" uid="uid://b5gjjj10t8h8p" path="res://DmeoProject/Player/Player.tscn" id="3_o207e"]
+[ext_resource type="PackedScene" uid="uid://b5gjjj10t8h8p" path="res://DemoProject/Player/Player.tscn" id="3_o207e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sx2jc"]
 size = Vector2(2356, 19)
