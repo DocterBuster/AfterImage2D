@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	calc_velocity_to_add = Vector2.ZERO
+	#calc_velocity_to_add = Vector2.ZERO
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -35,11 +35,11 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x += direction * SPEED
+	var direction := Input.get_vector("left", "right", "up", "down")
+	if direction.x:
+		velocity.x += direction.x * SPEED
 		velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
-		sprite.flip_h = sign(direction) == up_direction.y
+		sprite.flip_h = sign(direction.x) == up_direction.y
 		if(is_on_floor()):
 			$AnimationPlayer.play("walk")
 	else:
@@ -49,9 +49,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y += JUMP_VELOCITY * -sign(up_direction.y)
 		$AnimationPlayer.play("jump")
-	
-	## Rotate velcoty based on current rotation & add it!
-	#velocity = velocity.rotated(rotation)
 	
 	move_and_slide()
 
