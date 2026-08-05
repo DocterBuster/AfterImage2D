@@ -13,6 +13,12 @@ radius = 78.00641
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynfes"]
 size = Vector2(1017, 325)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_agmag"]
+radius = 558.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yklw0"]
+radius = 1410.2397
+
 [node name="Debugmain" type="Node2D" unique_id=1558773029]
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1656831820]
@@ -38,7 +44,7 @@ position = Vector2(576.5, 0)
 shape = SubResource("RectangleShape2D_sx2jc")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=759513194]
-position = Vector2(1022, 217)
+position = Vector2(1891, -1337)
 collision_layer = 2
 collision_mask = 3
 
@@ -56,7 +62,7 @@ z_index = 1
 texture = ExtResource("2_gn5qp")
 
 [node name="CharacterBody2D" parent="." unique_id=387965224 instance=ExtResource("3_o207e")]
-position = Vector2(620, 207)
+position = Vector2(1513, -149)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1940615477]
 process_callback = 0
@@ -109,3 +115,31 @@ position = Vector2(-10, -864)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=2037960877]
 position = Vector2(-15, -0.5)
 shape = SubResource("RectangleShape2D_sx2jc")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1734046406]
+position = Vector2(-479, -784.99994)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=1032729864]
+position = Vector2(-15, -0.5)
+shape = SubResource("RectangleShape2D_sx2jc")
+
+[node name="PlanetTest" type="Node2D" parent="." unique_id=1329092837]
+position = Vector2(2975, -251)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="PlanetTest" unique_id=1948142057]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetTest/StaticBody2D6" unique_id=556174350]
+shape = SubResource("CircleShape2D_agmag")
+
+[node name="Area2D" type="Area2D" parent="PlanetTest" unique_id=797636860]
+collision_layer = 3
+collision_mask = 3
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetTest/Area2D" unique_id=1348488870]
+shape = SubResource("CircleShape2D_yklw0")
+debug_color = Color(0, 0.6, 0.69803923, 0.09019608)
